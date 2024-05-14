@@ -26,6 +26,14 @@
      </div>
    </div>
 
+   <div class="container">
+     <div class="row">
+       <div class="div-title">
+         <h1>Blog Farmacias</h1>
+       </div>
+     </div>
+   </div>
+
    <?php include_once 'categories/navbar-categories.php'; ?>
 
    <?php include_once 'list-articles/list-articles.php'; ?>
@@ -37,5 +45,3 @@
  </body>
 
  </html>
-
- 

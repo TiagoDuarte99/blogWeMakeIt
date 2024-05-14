@@ -68,7 +68,6 @@
     </div>
   <?php endif; ?>
 
-
   <div class="row">
     <?php
     foreach ($blogArticles as $blog) {
@@ -87,7 +86,6 @@
       $name = isset($blog['name']) ? $blog['name'] : '';
       $created_at = isset($blog['created']) ? $blog['created'] : '';
       $id = isset($blog['id']) ? $blog['id'] : '';
-
 
       $link = "article.php?id=$id";
       /* TODO Alterar para isset($blog['descriptionios']) ? $blog['descriptionios'] : ''; 
@@ -132,7 +130,7 @@
             <div class="line"></div>
 
             <div class="name">
-              <p><?php echo $name; ?></p>
+              <p><i class="fa-solid fa-user"></i><?php echo $name; ?></p>
             </div>
 
             <div class="date-time">
@@ -173,6 +171,7 @@
         var category = document.getElementById('category').value;
 
         var formData = new FormData();
+        formData.append('method', 'POST');
         formData.append('title', title);
         formData.append('subtitle', subtitle);
         formData.append('message', message);
@@ -224,6 +223,7 @@
         var id = button.getAttribute('data-id');
 
         var formData = new FormData();
+        formData.append('method', 'PUT');
         formData.append('id', id);
 
         var xhr = new XMLHttpRequest();

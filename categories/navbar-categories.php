@@ -193,6 +193,7 @@
         var categoryObs = document.getElementById('categoryObs').value;
         //TODO se for o name vazio nao guardar mostar mensagem de obrigaçao
         var formData = new FormData();
+        formData.append('method', 'POST');
         formData.append('categoryName', categoryName);
         formData.append('categoryObs', categoryObs);
 
@@ -239,6 +240,7 @@
 
         // Criar um objeto FormData manualmente e adicionar os dados
         var formData = new FormData();
+        formData.append('method', 'DELETE');
         formData.append('id', categoryId);
         formData.append('delete', 'true');
 
@@ -276,6 +278,7 @@
         var categoryObsEdit = document.getElementById('categoryEditObs').value;
         // Criar um objeto FormData manualmente e adicionar os dados
         var formData = new FormData();
+        formData.append('method', 'PUT');
         formData.append('categoryIdEdit', categoryIdEdit);
         formData.append('catagoryNameEdit', catagoryNameEdit);
         formData.append('categoryObsEdit', categoryObsEdit);

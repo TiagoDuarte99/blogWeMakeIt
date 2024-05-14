@@ -45,6 +45,7 @@ a:hover {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+
   }
 
   & .categories {
@@ -52,8 +53,13 @@ a:hover {
     display: -ms-flexbox;
     display: flex;
     gap: 20px;
-
- /*    & a {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    /*    & a {
       margin-right: 20px;
     } */
   }
@@ -63,18 +69,24 @@ a:hover {
     margin-right: 20px;
   }
 
-  & .butons-login{
+  & .butons-login {
     width: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
     gap: 20px;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
   }
 }
 
@@ -131,6 +143,19 @@ button:hover {
   justify-content: space-between;
 }
 
+.div-title {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
 .edit-buttons {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -162,7 +187,6 @@ button:hover {
 }
 
 .img-card {
-  background-color: var(--white);
   border-radius: 20px 20px 0 0;
   height: 250px;
   width: 100%;
@@ -242,7 +266,7 @@ button:hover {
 
 .name {
   width: 100%;
-  padding: 0px !important;
+  padding: 8px 0 !important;
   color: var(--primary-color);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -255,6 +279,10 @@ button:hover {
   align-items: center;
   font-size: 20px;
 
+  & i {
+    margin-right: 20px;
+  }
+
   & p {
     margin-bottom: 0 !important;
   }
@@ -263,9 +291,8 @@ button:hover {
 
 
 .date-time {
-  height: 24px;
   width: 100%;
-  padding: 0px;
+  padding: 8px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -276,6 +303,9 @@ button:hover {
   -ms-flex-align: start;
   align-items: flex-start;
 
+  & p {
+    margin-bottom: 0 !important;
+  }
 }
 
 .read-more {

@@ -57,13 +57,7 @@ curl_close($curl_blogs);
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (
-    isset($_POST['title'])
-    && isset($_POST['subtitle'])
-    && isset($_POST['message'])
-    && isset($_POST['imageTeste'])
-    && isset($_POST['category'])
-  ) {
+  if (isset($_POST['method']) && $_POST['method'] == 'POST') {
     $title = $_POST['title'];
     $subtitle = $_POST['subtitle'];
     $message = $_POST['message'];
@@ -73,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     addPost($title, $subtitle, $message, $imageTeste, $category);
   }
 
-  if (isset($_POST['id'])) {
+  if(isset($_POST['method']) && $_POST['method'] == 'PUT') {
     $id = $_POST['id'];
 
     deletePost($id);

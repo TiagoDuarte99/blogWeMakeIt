@@ -60,19 +60,19 @@ curl_close($curl_blogs);
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (isset($_POST['categoryName']) && isset($_POST['categoryObs'])) {
+  if (isset($_POST['method']) && $_POST['method'] == 'POST') {
     $nome = $_POST['categoryName'];
     $obs = $_POST['categoryObs'];
     addCategory($nome, $obs);
   }
 
-  if (isset($_POST['id']) && isset($_POST['delete'])) {
+  if (isset($_POST['method']) && $_POST['method'] == 'DELETE') {
     $id = $_POST['id'];
     $delete = $_POST['delete'];
     deleteCategory($id, $delete);
   }
 
-  if (isset($_POST['categoryIdEdit']) && isset($_POST['catagoryNameEdit']) && isset($_POST['categoryObsEdit'])){
+  if (isset($_POST['method']) && $_POST['method'] == 'PUT'){
     $id = $_POST['categoryIdEdit'];
     $name = $_POST['catagoryNameEdit'];
     $obs = $_POST['categoryObsEdit'];
