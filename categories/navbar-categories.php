@@ -12,14 +12,15 @@
               $id = isset($category['id']) ? $category['id'] : '';
               $name = isset($category['name']) ? $category['name'] : '';
             ?>
-              <a href="javascript:void(0);" onclick="sendCategoryId(<?php echo $id; ?>)">
-                <button class="button-primary">
-                  <?php echo $name; ?>
-                </button>
-              </a>
+              <button class="button-primary category-button" data-id="<?php echo $id; ?>">
+                <?php echo $name; ?>
+              </button>
             <?php
             }
             ?>
+             <button class="button-primary category-button" data-id="0">
+                Listar Todas
+              </button>
           </div>
         </div>
         <div class="butons-login">
@@ -167,24 +168,59 @@
   </div>
 </section>
 
-<script>
+<!-- <script>
   document.addEventListener('DOMContentLoaded', function() {
     var sectionCategories = document.getElementById('section-categories');
 
     //editar 
-    var categoryIdSelect = document.getElementById('categoryIdEdit');
-    categoryIdSelect.addEventListener('change', function() {
-      var selectedCategoryId = categoryIdSelect.value;
-      var labels = document.querySelectorAll('[data-category-id]');
-      labels.forEach(function(label) {
-        if (label.getAttribute('data-category-id') === selectedCategoryId) {
-          label.style.display = 'block';
-        } else {
-          label.style.display = 'none';
-        }
-      });
-    }); //editar
+    /*    var categoryIdSelect = document.getElementById('categoryIdEdit');
+       categoryIdSelect.addEventListener('change', function() {
+         var selectedCategoryId = categoryIdSelect.value;
+         var labels = document.querySelectorAll('[data-category-id]');
+         labels.forEach(function(label) {
+           if (label.getAttribute('data-category-id') === selectedCategoryId) {
+             label.style.display = 'block';
+           } else {
+             label.style.display = 'none';
+           }
+         });
+       }); */ //editar
 
+
+
+    /* 
+        //Filtrar
+        var categoryButtons = document.querySelectorAll('.category-button');
+
+        categoryButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            var categoryId = this.getAttribute('data-id');
+            sendCategoryId(categoryId);
+          });
+        });
+
+        function sendCategoryId(categoryId) {
+          var formData = new FormData();
+          formData.append('categoryId', categoryId);
+          console.log(categoryId)
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', 'list-articles/list-articles.php', true);
+          xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+        var listCategories = document.getElementById('list-categories');
+        listCategories.innerHTML = xhr.responseText;
+
+              console.log(xhr.responseText);
+            } else {
+              console.error('Erro ao enviar categoria:', xhrReload.responseText);
+            }
+          };
+          xhr.onerror = function() {
+            console.error('Erro de rede ao enviar categoria.');
+          };
+          xhr.send(formData);
+        }
+        //Filtrar */
 
 
     sectionCategories.addEventListener('click', function(event) {
@@ -283,36 +319,36 @@
         formData.append('catagoryNameEdit', catagoryNameEdit);
         formData.append('categoryObsEdit', categoryObsEdit);
 
-       // Enviar os dados via XMLHttpRequest
-       var xhr = new XMLHttpRequest();
-      xhr.open('POST', 'categories/category.php', true);
-      xhr.onload = function() {
-        if (xhr.status >= 200 && xhr.status < 300) {
-          // Processar a resposta conforme necessário
-          var closeButton = document.getElementById('close-modal-edit');
-          closeButton.click();
-          var navbarCategoriesContainer = document.getElementById('section-categories');
-          var xhrReload = new XMLHttpRequest();
-          xhrReload.open('GET', 'categories/navbar-categories.php', true);
-          xhrReload.onload = function() {
-            if (xhrReload.status >= 200 && xhrReload.status < 300) {
-              navbarCategoriesContainer.innerHTML = xhrReload.responseText;
-            } else {
-              console.error('Erro na requisição para recarregar o componente:', xhrReload.statusText);
-            }
-          };
-          xhrReload.send();
-        } else {
-          console.error('Erro na requisição:', xhr.statusText);
-        }
-      };
-      xhr.onerror = function() {
-        console.error('Erro de rede ao enviar requisição.');
-      };
-      xhr.send(formData);
+        // Enviar os dados via XMLHttpRequest
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'categories/category.php', true);
+        xhr.onload = function() {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            // Processar a resposta conforme necessário
+            var closeButton = document.getElementById('close-modal-edit');
+            closeButton.click();
+            var navbarCategoriesContainer = document.getElementById('section-categories');
+            var xhrReload = new XMLHttpRequest();
+            xhrReload.open('GET', 'categories/navbar-categories.php', true);
+            xhrReload.onload = function() {
+              if (xhrReload.status >= 200 && xhrReload.status < 300) {
+                navbarCategoriesContainer.innerHTML = xhrReload.responseText;
+              } else {
+                console.error('Erro na requisição para recarregar o componente:', xhrReload.statusText);
+              }
+            };
+            xhrReload.send();
+          } else {
+            console.error('Erro na requisição:', xhr.statusText);
+          }
+        };
+        xhr.onerror = function() {
+          console.error('Erro de rede ao enviar requisição.');
+        };
+        xhr.send(formData);
       }
 
     });
 
   });
-</script>
+</script> -->

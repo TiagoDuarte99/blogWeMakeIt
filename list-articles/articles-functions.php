@@ -1,61 +1,9 @@
 <?php
 $envFile = __DIR__ . '/../.env';
 $envVariables = parse_ini_file($envFile);
-
-$url_blogs = $envVariables['url_api'] . 'verify/blogs';
-
-// Acessar a variável de ambiente KEY_SECRET
 $key_secret = $envVariables['key_secret'];
 
-// Dados para verificar blogs
-$data_blogs = array(
-  "next" => 0,
-  "category" => 0
-);
 
-// Cabeçalhos adicionais
-$headers = array(
-  "Secret: $key_secret",
-  "Content-Type: application/json",
-  "Client: max",
-  "Token: "
-);
-
-// Inicializa uma nova sessão cURL
-$curl_blogs = curl_init($url_blogs);
-
-// Configura as opções da requisição cURL para a solicitação de verificação de blogs
-curl_setopt($curl_blogs, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($curl_blogs, CURLOPT_POST, true);
-curl_setopt($curl_blogs, CURLOPT_POSTFIELDS, json_encode($data_blogs));
-curl_setopt($curl_blogs, CURLOPT_HTTPHEADER, $headers);
-
-// Faz a requisição cURL para verificar blogs
-$response_blogs = curl_exec($curl_blogs);
-
-if ($response_blogs === false) {
-  echo "Erro ao fazer a solicitação para verificar blogs: " . curl_error($curl_blogs);
-} else {
-  $blogs_data = json_decode($response_blogs, true);
-
-  $blogArticles = $blogs_data['blogs'];
-  $blogCategories = $blogs_data['blogTypes'];
-
-  // GUARDA O TOKEN
-  if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-  }
-  if (isset($_SESSION['token'])) {
-    $showButtons = true;
-  } else {
-    $showButtons = false;
-  }
-}
-
-curl_close($curl_blogs);
-?>
-
-<?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (isset($_POST['method']) && $_POST['method'] == 'POST') {
     $title = $_POST['title'];
@@ -67,12 +15,90 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     addPost($title, $subtitle, $message, $imageTeste, $category);
   }
 
-  if(isset($_POST['method']) && $_POST['method'] == 'PUT') {
+  if (isset($_POST['method']) && $_POST['method'] == 'PUT') {
     $id = $_POST['id'];
 
     deletePost($id);
   }
+
+  if (isset($_POST['method']) && $_POST['method'] == 'GET') {
+    $categoryId = isset($_POST['categoryId']) ? $_POST['categoryId'] : 0;
+    $articlesData = getArticles($categoryId);
+
+    $blogArticles = $articlesData['blogArticles'];
+    $blogCategories = $articlesData['blogCategories'];
+    $showButtons = $articlesData['showButtons'];
+
+    include 'list-articles.php';
+    exit;
+  }
 }
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+  $categoryId = 0;
+  $articlesData = getArticles($categoryId);
+
+  $blogArticles = $articlesData['blogArticles'];
+  $blogCategories = $articlesData['blogCategories'];
+  $showButtons = $articlesData['showButtons'];
+}
+
+function getArticles($categoryId)
+{
+  global $envVariables, $key_secret;
+
+  $url_blogs = $envVariables['url_api'] . 'verify/blogs';
+  $data_blogs = array(
+    "next" => 0,
+    "category" => $categoryId
+  );
+
+  $headers = array(
+    "Secret: $key_secret",
+    "Content-Type: application/json",
+    "Client: max",
+    "Token: "
+  );
+
+
+  // Inicializa uma nova sessão cURL
+  $curl_blogs = curl_init($url_blogs);
+
+  // Configura as opções da requisição cURL para a solicitação de verificação de blogs
+  curl_setopt($curl_blogs, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($curl_blogs, CURLOPT_POST, true);
+  curl_setopt($curl_blogs, CURLOPT_POSTFIELDS, json_encode($data_blogs));
+  curl_setopt($curl_blogs, CURLOPT_HTTPHEADER, $headers);
+
+  // Faz a requisição cURL para verificar blogs
+  $response_blogs = curl_exec($curl_blogs);
+  /* echo "resposta: $response_blogs"; */
+  if ($response_blogs === false) {
+    echo "Erro ao fazer a solicitação para verificar blogs: " . curl_error($curl_blogs);
+  } else {
+    $blogs_data = json_decode($response_blogs, true);
+
+    $blogArticles = $blogs_data['blogs'];
+    $blogCategories = $blogs_data['blogTypes'];
+    /*     echo "blog articles: <br>";
+    print_r($blogArticles); */
+    // GUARDA O TOKEN
+    if (session_status() == PHP_SESSION_NONE) {
+      session_start();
+    }
+
+    $showButtons = (isset($_SESSION['token'])) ? true : false;
+
+
+    return array(
+      'blogArticles' => $blogArticles,
+      'blogCategories' => $blogCategories,
+      'showButtons' => $showButtons
+    );
+  }
+
+  curl_close($curl_blogs);
+}
+
 
 function addPost($title, $subtitle, $message, $imageTeste, $category)
 {
@@ -109,14 +135,14 @@ function addPost($title, $subtitle, $message, $imageTeste, $category)
 
   // Faz a requisição cURL para adicionar a categoria
   $response = curl_exec($curl);
-
+  /* echo "resposta: $response"; */
   if ($response === false) {
     echo "Erro ao fazer a solicitação para adicionar categoria: " . curl_error($curl);
   } else {
     // Log da resposta
     echo "<script>console.log('Resposta da API:', " . json_encode($response) . ");</script>";
     // Atualiza a lista de categorias após inserção bem-sucedida
-    header("Location: list-articles.php");
+ /*    header("Location: list-articles.php"); */
     exit;
   }
 

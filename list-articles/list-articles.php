@@ -77,6 +77,7 @@
       $categoryName = '';
       foreach ($blogCategories as $category) {
         if ($category['id'] == $categoryId) {
+          $categoryId = $category['id'];
           $categoryName = $category['name'];
           break;
         }
@@ -109,8 +110,7 @@
           <div style="padding: 24px;">
             <div class="categorie-share">
               <div class="left">
-                <button><?php echo $categoryName; ?></button>
-
+                <button class="category-button" data-id="<?php echo $categoryId; ?>"><?php echo $categoryName; ?></button>
               </div>
               <div class="right">
                 <button>
@@ -157,7 +157,8 @@
   </div>
 </div>
 
-<script>
+
+<!-- <script>
   document.addEventListener('DOMContentLoaded', function() {
     var listCategories = document.getElementById('list-categories');
 
@@ -256,4 +257,4 @@
 
 
   });
-</script>
+</script> -->
