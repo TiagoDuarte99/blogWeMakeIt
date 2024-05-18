@@ -2,6 +2,11 @@
 $envFile = __DIR__ . '/../.env';
 $envVariables = parse_ini_file($envFile);
 $key_secret = $envVariables['key_secret'];
+// GUARDA O TOKEN
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -34,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 }
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-  $categoryId = 0;
+  $categoryId = isset($_GET['categoryId']) ? (int) $_GET['categoryId'] : 0;
   $articlesData = getArticles($categoryId);
 
   $blogArticles = $articlesData['blogArticles'];
@@ -45,6 +50,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 function getArticles($categoryId)
 {
   global $envVariables, $key_secret;
+
+  /*   error_log($key_secret); */ /* ASSIM PARA VER NO PHP_ERROR_LOG */
 
   $url_blogs = $envVariables['url_api'] . 'verify/blogs';
   $data_blogs = array(
@@ -76,15 +83,9 @@ function getArticles($categoryId)
     echo "Erro ao fazer a solicitação para verificar blogs: " . curl_error($curl_blogs);
   } else {
     $blogs_data = json_decode($response_blogs, true);
-
+     /* error_log( print_r( $blogs_data, true ) ); */
     $blogArticles = $blogs_data['blogs'];
     $blogCategories = $blogs_data['blogTypes'];
-    /*     echo "blog articles: <br>";
-    print_r($blogArticles); */
-    // GUARDA O TOKEN
-    if (session_status() == PHP_SESSION_NONE) {
-      session_start();
-    }
 
     $showButtons = (isset($_SESSION['token'])) ? true : false;
 
@@ -135,14 +136,11 @@ function addPost($title, $subtitle, $message, $imageTeste, $category)
 
   // Faz a requisição cURL para adicionar a categoria
   $response = curl_exec($curl);
-  /* echo "resposta: $response"; */
+
   if ($response === false) {
     echo "Erro ao fazer a solicitação para adicionar categoria: " . curl_error($curl);
   } else {
-    // Log da resposta
-    echo "<script>console.log('Resposta da API:', " . json_encode($response) . ");</script>";
-    // Atualiza a lista de categorias após inserção bem-sucedida
- /*    header("Location: list-articles.php"); */
+    header("Location: list-articles.php");
     exit;
   }
 
@@ -184,9 +182,6 @@ function deletePost($id)
   if ($response === false) {
     echo "Erro ao fazer a solicitação para adicionar categoria: " . curl_error($curl);
   } else {
-    // Log da resposta
-    echo "<script>console.log('Resposta da API:', " . json_encode($response) . ");</script>";
-    // Atualiza a lista de categorias após inserção bem-sucedida
     header("Location: list-articles.php");
     exit;
   }
