@@ -16,7 +16,7 @@ session_destroy();
 <body>
     <h1>Logout</h1>
     <p>Você saiu da sua conta com sucesso.</p>
-    <a href="blog.php"><button>Voltar</button></a>
+    <a href="./list-articles/list-articles.php"><button>Voltar</button></a>
 
     <script>
         // Limpa o token do localStorage

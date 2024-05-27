@@ -9,7 +9,7 @@
             <div class="navbar-edit col-12">
 
               <button class="button-edit" type="button" data-toggle="modal" data-target="#addCategory">
-                Crear nueva category
+              <i class="fa-solid fa-circle-plus"></i> Crear nueva category
               </button>
 
               <div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="addCategoryLabel" aria-hidden="true">
@@ -26,6 +26,7 @@
                         <div class="form-group">
                           <label for="categoryName">Nome da Categoria:</label>
                           <input type="text" class="form-control" id="categoryName" name="categoryName">
+                          <span class="error-message" id="categoryName-error" style="display: none; color: red;">Nome obrigatório</span>
                         </div>
                         <div class="form-group">
                           <label for="categoryObs">Observação:</label>
@@ -35,16 +36,17 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" id="close-modal-save" data-dismiss="modal">Fechar</button>
-                      <button type="button" class="btn btn-primary savebtn" id="saveCategoryBtn">Guardar</button>
+                      <button type="button" class="button-primary" id="saveCategoryBtn">Guardar</button>
                     </div>
                   </div>
                 </div>
               </div>
-
+              <!-- Botão "Eliminar Categoria" -->
               <button class="button-edit" type="button" data-toggle="modal" data-target="#deleteCategory">
-                <i class="fa-solid fa-trash"></i> apaga category
+                <i class="fa-solid fa-trash"></i> Apaga Categoria
               </button>
 
+              <!-- Modal de Confirmação -->
               <div class="modal fade" id="deleteCategory" tabindex="-1" aria-labelledby="deleteCategoryLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -67,10 +69,12 @@
                           </select>
                         </div>
                       </form>
+                      <div id="confirmationMessage" class="alert alert-warning" role="alert" style="display: none;">
+                        Tem certeza de que deseja eliminar esta categoria?
+                      </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" id="close-modal-delete" data-dismiss="modal">Fechar</button>
-                      <!-- Atualizado: incluído atributo de dados para o ID da categoria -->
                       <button type="button" class="btn btn-danger" id="deleteCategoryBtn">Eliminar</button>
                     </div>
                   </div>
@@ -126,7 +130,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" id="close-modal-edit" data-dismiss="modal">Fechar</button>
-                      <button type="button" class="btn btn-danger" id="editCategoryBtn">Editar</button>
+                      <button type="button" class="button-primary" id="editCategoryBtn">Editar</button>
                     </div>
                   </div>
                 </div>

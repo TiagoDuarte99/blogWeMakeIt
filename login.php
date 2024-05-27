@@ -34,7 +34,7 @@ if ($response_login === false) {
     $error_message = "Erro ao fazer a solicitação de login: " . curl_error($curl_login);
 } else {
     // Processa a resposta do login
-    $login_button = '<a href="blog.php"><button>voltar</button></a>';
+    $login_button = '<a href="./list-articles/list-articles.php"><button>voltar</button></a>';
     if (!empty($response_login) && strpos($response_login, "token") !== false) {
         // Extrai o token da resposta
         $token = json_decode($response_login, true)['token'];
