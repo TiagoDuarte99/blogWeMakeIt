@@ -20,9 +20,32 @@
 
   <!-- EDITOR -->
   <!-- <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script> -->
-  <script src="../ckeditor/build/ckeditor.js"></script>
+  <?php if ($showButtons) : ?>
+    <script src="../ckeditor/build/ckeditor.js"></script>
+  <?php endif; ?>
 
-
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://wemakeitdemo2.svr1.appsfarma.com/blog",
+        "name": "We Make It - Blog"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "We Make It",
+        "url": "https://wemakeit.es/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://wemakeit.es/images/ecommerce.png",
+          "width": 700,
+          "height": 700
+        }
+      }
+    }
+  </script>
 
 </head>
 
@@ -143,12 +166,12 @@
 
           $wordsCount = 0;
           if (preg_match('/<small\s+id="wordCharCount"\s+class="form-text\s+text-muted">(\d+)\s+words<\/small>/', $wordsCountDescription, $matches)) {
-            error_log( print_r( $matches[1], true ) ); 
+            error_log(print_r($matches[1], true));
             $wordsCount = intval($matches[1]);
           }
           $averageWordsPerMinute = 200; // Média de palavras por minuto
           $readingTimeMinutes = ceil($wordsCount / $averageWordsPerMinute);
-            
+
 
           $link = "../article/article.php?id=$id";
           /*  $link = isset($blog['id']) ? $blog['descriptionios'] : ''; */

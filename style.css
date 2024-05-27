@@ -564,7 +564,6 @@ button:hover {
   }
 
 
-
   & .recent-posts {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -587,6 +586,12 @@ button:hover {
   & .image-style-side {
     float: right;
     max-width: 50%;
+  }
+
+  @media (max-width: 600px) {
+    .image-style-side{
+      max-width: 100%;
+    }
   }
 
   /* Reseta o estilo da figura */

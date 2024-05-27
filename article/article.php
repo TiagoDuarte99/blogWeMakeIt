@@ -146,7 +146,7 @@
             <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode($article['descriptionios']); ?>&text=<?php echo urlencode($article['title']); ?>" target="_blank">
               <i class="fab fa-twitter"></i> Twitter
             </a>
-            <p id="copyLink">
+            <p id="copyLink" data-link="<?php echo $article['descriptionios']; ?>">
               <i class="fas fa-link"></i> Copiar Link
             </p>
           </div>
