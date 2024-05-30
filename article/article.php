@@ -7,9 +7,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo htmlspecialchars($article['title']); ?></title>
-  <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="../ckeditor/sample/styles.css">
 
+
+  <link rel="stylesheet" href="../style.css">
 
   <!-- icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -22,11 +22,32 @@
 
   <!--   
   <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script> -->
+  <!-- <link rel="stylesheet" href="../ckeditor/sample/styles.css"> -->
 
+  <meta name="description" content="<?php echo htmlspecialchars($article['obs']); ?>">
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="<?php echo htmlspecialchars($article['title']); ?>">
+  <meta property="og:description" content="<?php echo htmlspecialchars($article['obs']); ?>">
+  <meta property="og:url" content="<?php echo htmlspecialchars($article['descriptionios']); ?>">
+  <meta property="og:site_name" content="We Make It">
+  <meta property="article:publisher" content="https://www.facebook.com/wemakeit/">
+  <meta property="article:published_time" content="<?php echo date(DateTime::ATOM, strtotime($article['created'])); ?>">
+  <meta property="article:modified_time" content="<?php echo date(DateTime::ATOM, strtotime($article['updated_at'])); ?>">
+  <meta property="og:image" content="<?php echo htmlspecialchars($article['url']); ?>">
+  <meta property="og:image:width" content="885">
+  <meta property="og:image:height" content="375">
+  <meta property="og:image:type" content="image/jpeg">
 
-  <!-- 
-  Adicionar isto caso exista uma pagina para o utilizador que escreveu o artigo  
-  "url": "site se tiver bibliografio do autor ou assim/<?php echo urlencode($article['name']); ?>" -->
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<?php echo htmlspecialchars($article['title']); ?>">
+  <meta name="twitter:description" content="<?php echo htmlspecialchars($article['obs']); ?>">
+  <meta name="twitter:image" content="<?php echo htmlspecialchars($article['url']); ?>">
+  <meta name="twitter:site" content="@wemakeit">
+  <meta name="twitter:creator" content="@wemakeit">
+
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -116,7 +137,7 @@
               <?php
 
               $wordsCountDescription = $article['description'];
-              
+
               $wordsCount = 0;
               if (preg_match('/<small\s+id="wordCharCount"\s+class="form-text\s+text-muted">(\d+)\s+words<\/small>/', $wordsCountDescription, $matches)) {
                 $wordsCount = intval($matches[1]);

@@ -1,5 +1,5 @@
 <?php include_once 'articles-functions.php'; ?>
-
+<!-- OPENGRAFF -->
 <!DOCTYPE html>
 <html lang="es">
 
@@ -215,7 +215,7 @@
               <div class="img-card">
                 <img src="<?php echo $url; ?>" alt="<?php echo $title; ?>" itemprop="image">
               </div>
-              <div style="padding: 24px;">
+              <div class="card-info">
                 <div class="categorie-share">
                   <div class="left">
                     <button class="category-button" data-id="<?php echo $categoryId; ?>" itemprop="articleSection"><?php echo $categoryName; ?></button>
@@ -266,9 +266,9 @@
                     <p itemprop="timeRequired"><?php echo $readingTimeMinutes; ?> min Leitura</p>
                   </div>
                 </div>
-                <div class="read-more">
-                  <a href="<?php echo $link; ?>" itemprop="mainEntityOfPage"><button class="button-primary">LEER MÁS</button></a>
-                </div>
+              </div>
+              <div class="read-more">
+                <a href="<?php echo $link; ?>" itemprop="mainEntityOfPage"><button class="button-primary">LEER MÁS</button></a>
               </div>
             </div>
           </div>
