@@ -158,7 +158,7 @@
 
 
           <div class="social-share">
-            <a href="https://api.whatsapp.com/send?text=<?php echo urlencode('Title: ' . $article['title'] . ' ' . 'Description: ' .  $article['descriptionios']); ?>" target="_blank">
+            <a href="https://api.whatsapp.com/send?text=<?php echo urlencode($article['descriptionios']); ?>" target="_blank">
               <i class="fab fa-whatsapp"></i> WhatsApp
             </a>
             <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode($article['descriptionios']); ?>" target="_blank">

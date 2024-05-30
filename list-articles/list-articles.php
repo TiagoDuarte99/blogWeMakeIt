@@ -227,10 +227,10 @@
                       <i class="fa-solid fa-share"></i>
                     </button>
                     <div class="share-buttons" style="display: none;">
-                      <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode($description); ?>&text=<?php echo urlencode($title); ?>" target="_blank">
+                      <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode($description); ?>" target="_blank">
                         <i class="fab fa-twitter"></i> Twitter
                       </a>
-                      <a href="https://api.whatsapp.com/send?text=<?php echo urlencode('Title: ' . $title . ' ' . $link); ?>" target="_blank">
+                      <a href="https://api.whatsapp.com/send?text=<?php echo urlencode($link); ?>" target="_blank">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                       </a>
                       <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo urlencode($description); ?>" target="_blank">
