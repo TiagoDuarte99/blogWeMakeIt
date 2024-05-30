@@ -9,6 +9,8 @@
   <title>Lista de artigos</title>
   <link rel="stylesheet" href="../style.css">
 
+  <meta name="description" content="Este é o blog da farmácia X que apresenta uma variedade de artigos sobre diferentes categorias de saúde e bem-estar. Encontre informações úteis e dicas sobre diversos temas, desde tratamentos médicos a conselhos de estilo de vida saudável. Explore nosso blog para aprender mais e manter-se atualizado com as últimas novidades em saúde.">
+
   <!-- icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
